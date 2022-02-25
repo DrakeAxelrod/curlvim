@@ -1,11 +1,11 @@
 ---@diagnostic disable: undefined-global
-local M = {}
-local import = assert(load(vim.fn.system({
-	"curl",
-	"-s",
-	"https://raw.githubusercontent.com/DrakeAxelrod/curlvim/main/import.lua",
-})))()
+local function import(file)
+	local fmt = string.format
+	return assert(load(vim.fn.system({
+		"curl",
+		"-s",
+		fmt("https://raw.githubusercontent.com/DrakeAxelrod/curlvim/main/%s.lua", file),
+	})))()
+end
 
-M.hello = import("helloworld")
-
-return M
+import("packer")
